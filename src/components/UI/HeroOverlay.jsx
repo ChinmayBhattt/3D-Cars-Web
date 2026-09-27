@@ -1,7 +1,7 @@
 import React from 'react';
-import { ChevronDown, Compass, ShieldCheck } from 'lucide-react';
+import { ChevronDown, RotateCw } from 'lucide-react';
 
-export default function HeroOverlay({ scrollProgress = 0 }) {
+export default function HeroOverlay({ scrollProgress = 0, onResetRotation, userRotationY = 0 }) {
   // Fade out hero overlay as user scrolls down towards exploded sequence
   const opacity = Math.max(0, 1 - scrollProgress * 4.5);
 
@@ -46,36 +46,76 @@ export default function HeroOverlay({ scrollProgress = 0 }) {
             <span>MOLSHEIM ATELIER • CHASSIS 001/001</span>
           </div>
 
+          {/* Headline with wrapped span so ENGINEERED never breaks character */}
           <h1
             style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(2.2rem, 4.6vw, 4.5rem)',
+              fontSize: 'clamp(1.8rem, 4.2vw, 4.0rem)',
               fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: '-0.01em',
+              lineHeight: 1.1,
+              letterSpacing: '-0.02em',
               textTransform: 'uppercase',
               margin: '0 0 1rem 0',
               background: 'linear-gradient(180deg, #ffffff 40%, #94a3b8 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              maxWidth: '820px',
+              maxWidth: '780px',
             }}
           >
-            ENGINEERED BEYOND LIMITS
+            <span style={{ whiteSpace: 'nowrap' }}>ENGINEERED</span> BEYOND LIMITS
           </h1>
 
           <p
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(0.85rem, 1.4vw, 1.15rem)',
+              fontSize: 'clamp(0.8rem, 1.3vw, 1.05rem)',
               letterSpacing: '0.2em',
               color: '#94a3b8',
               textTransform: 'uppercase',
-              margin: 0,
+              margin: '0 0 1.25rem 0',
             }}
           >
             Bugatti La Voiture Noire • The Black Car
           </p>
+
+          {/* Mouse drag interactive hint pill */}
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '6px 12px',
+              borderRadius: '6px',
+              background: 'rgba(6, 8, 12, 0.75)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '10px',
+              color: '#cbd5e1',
+              pointerEvents: 'auto',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            <RotateCw size={12} className="text-cyan-400" />
+            <span>DRAG MOUSE TO ROTATE 360°</span>
+            {Math.abs(userRotationY) > 0.1 && (
+              <button
+                onClick={onResetRotation}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--accent-cyan)',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '10px',
+                  padding: 0,
+                  marginLeft: '4px',
+                }}
+              >
+                [ RESET POSE ]
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Right Corner Heritage Badge */}

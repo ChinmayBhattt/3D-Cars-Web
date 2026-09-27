@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -8,12 +8,15 @@ import Navbar from './components/UI/Navbar';
 import HeroOverlay from './components/UI/HeroOverlay';
 import ExplodedOverlay from './components/UI/ExplodedOverlay';
 import Preloader from './components/UI/Preloader';
+import ThemeBar from './components/UI/ThemeBar';
 
 import PerformanceSection from './components/Sections/PerformanceSection';
 import DesignPhilosophySection from './components/Sections/DesignPhilosophySection';
 import InteriorSection from './components/Sections/InteriorSection';
 import ConfiguratorSection from './components/Sections/ConfiguratorSection';
 import CtaSection from './components/Sections/CtaSection';
+
+import { THEMES, applyThemeVariables } from './utils/theme';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -23,17 +26,46 @@ export default function App() {
   const [explodeProgress, setExplodeProgress] = useState(0);
   const [heroScroll, setHeroScroll] = useState(0);
 
-  // Customization & Camera state
-  const [carColor, setCarColor] = useState('#0c0d12');
-  const [caliperColor, setCaliperColor] = useState('#00f0ff');
+  // 4 Theme system
+  const [currentThemeId, setCurrentThemeId] = useState('noire');
+  const currentTheme = THEMES[currentThemeId] || THEMES.noire;
+
+  const [carColor, setCarColor] = useState(currentTheme.carColor);
+  const [caliperColor, setCaliperColor] = useState(currentTheme.caliperColor);
+  const [rimColor, setRimColor] = useState(currentTheme.rimColor);
+  const [leatherColor, setLeatherColor] = useState(currentTheme.leatherColor);
+
+  // Interactive mouse rotation state
+  const [userRotationY, setUserRotationY] = useState(0);
+  const [userRotationX, setUserRotationX] = useState(0);
+  const isDraggingRef = useRef(false);
+  const prevPointerRef = useRef({ x: 0, y: 0 });
+
+  // Camera & inspection state
   const [activeHotspot, setActiveHotspot] = useState(null);
   const [cameraMode, setCameraMode] = useState('default');
-  const [enableOrbit, setEnableOrbit] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isOpenInquire, setIsOpenInquire] = useState(false);
 
   const lenisRef = useRef(null);
   const explodedTrackRef = useRef(null);
+
+  // Switch theme function
+  const handleSelectTheme = useCallback((themeId) => {
+    const theme = THEMES[themeId];
+    if (!theme) return;
+    setCurrentThemeId(themeId);
+    setCarColor(theme.carColor);
+    setCaliperColor(theme.caliperColor);
+    setRimColor(theme.rimColor);
+    setLeatherColor(theme.leatherColor);
+    applyThemeVariables(theme);
+  }, []);
+
+  // Initialize theme on mount
+  useEffect(() => {
+    applyThemeVariables(THEMES.noire);
+  }, []);
 
   // Initialize Lenis smooth scroll and synchronize with GSAP ScrollTrigger
   useEffect(() => {
@@ -63,7 +95,6 @@ export default function App() {
   useEffect(() => {
     if (isLoading) return;
 
-    // Refresh triggers once preloader finishes
     ScrollTrigger.refresh();
 
     // Hero trigger for fading out hero text
@@ -77,7 +108,7 @@ export default function App() {
       },
     });
 
-    // Main 3D Exploded View Scroll-Scrub Trigger (scrub: 1.2 for heavy, physical luxury feel)
+    // Main 3D Exploded View Scroll-Scrub Trigger (scrub: 1.2)
     const explodeTrigger = ScrollTrigger.create({
       trigger: '#exploded-track',
       start: 'top top',
@@ -85,7 +116,6 @@ export default function App() {
       scrub: 1.2,
       onUpdate: (self) => {
         setExplodeProgress(self.progress);
-        // Reset custom camera mode back to scroll-driven default when scrolling in exploded view
         if (self.progress > 0.05 && self.progress < 0.95) {
           setCameraMode('default');
         }
@@ -98,7 +128,34 @@ export default function App() {
     };
   }, [isLoading]);
 
-  // Handle hotspot selection
+  // Mouse Drag rotation handlers
+  const handlePointerDown = (e) => {
+    // Only drag if not clicking buttons or interactive links
+    if (e.target.closest('button, a, input, select, .callout-badge-compact')) return;
+    isDraggingRef.current = true;
+    prevPointerRef.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDraggingRef.current) return;
+    const deltaX = e.clientX - prevPointerRef.current.x;
+    const deltaY = e.clientY - prevPointerRef.current.y;
+    prevPointerRef.current = { x: e.clientX, y: e.clientY };
+
+    setUserRotationY((prev) => prev + deltaX * 0.007);
+    setUserRotationX((prev) => Math.max(-0.25, Math.min(0.25, prev + deltaY * 0.003)));
+  };
+
+  const handlePointerUp = () => {
+    isDraggingRef.current = false;
+  };
+
+  const resetRotation = () => {
+    setUserRotationY(0);
+    setUserRotationX(0);
+  };
+
+  // Hotspot selection
   const handleSelectHotspot = (id) => {
     setActiveHotspot(id);
     if (id === 'engine') setCameraMode('engine');
@@ -109,12 +166,30 @@ export default function App() {
   };
 
   return (
-    <div style={{ backgroundColor: '#060608', color: '#f8fafc', minHeight: '100vh', position: 'relative' }}>
+    <div
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      style={{
+        backgroundColor: 'var(--bg-primary)',
+        color: '#f8fafc',
+        minHeight: '100vh',
+        position: 'relative',
+        cursor: isDraggingRef.current ? 'grabbing' : 'default',
+        transition: 'background-color 0.4s ease',
+      }}
+    >
       {/* Preloader */}
       {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
 
       {/* Luxury Navbar */}
       <Navbar onOpenInquire={() => setIsOpenInquire(true)} />
+
+      {/* Floating 4-Theme Selector Bar */}
+      <ThemeBar
+        currentThemeId={currentThemeId}
+        onSelectTheme={handleSelectTheme}
+      />
 
       {/* ========================================================= */}
       {/* FIXED 3D VIEWPORT CANVAS (STAYS PINNED FOR SCROLL HERO)   */}
@@ -127,7 +202,7 @@ export default function App() {
           width: '100vw',
           height: '100vh',
           zIndex: 5,
-          pointerEvents: enableOrbit ? 'auto' : 'none',
+          pointerEvents: 'none', // Handled smoothly by pointer event listeners
         }}
         className="studio-vignette"
       >
@@ -135,11 +210,14 @@ export default function App() {
           explodeProgress={explodeProgress}
           carColor={carColor}
           caliperColor={caliperColor}
+          rimColor={rimColor}
+          leatherColor={leatherColor}
           activeHotspot={activeHotspot}
           onSelectHotspot={handleSelectHotspot}
           cameraMode={cameraMode}
-          enableOrbit={enableOrbit}
           isSpinning={isSpinning}
+          userRotationY={userRotationY}
+          userRotationX={userRotationX}
         />
       </div>
 
@@ -153,7 +231,11 @@ export default function App() {
           zIndex: 10,
         }}
       >
-        <HeroOverlay scrollProgress={heroScroll} />
+        <HeroOverlay
+          scrollProgress={heroScroll}
+          onResetRotation={resetRotation}
+          userRotationY={userRotationY}
+        />
       </section>
 
       {/* ========================================================= */}
@@ -170,7 +252,6 @@ export default function App() {
           pointerEvents: 'none',
         }}
       >
-        {/* Sticky Exploded HUD Overlay that remains on screen during explode scrub */}
         <div
           style={{
             position: 'sticky',
@@ -211,8 +292,8 @@ export default function App() {
           onChangeCarColor={(col) => setCarColor(col)}
           caliperColor={caliperColor}
           onChangeCaliperColor={(col) => setCaliperColor(col)}
-          enableOrbit={enableOrbit}
-          onToggleOrbit={() => setEnableOrbit(!enableOrbit)}
+          enableOrbit={false}
+          onToggleOrbit={resetRotation}
           isSpinning={isSpinning}
           onToggleSpin={() => setIsSpinning(!isSpinning)}
         />
