@@ -13,20 +13,16 @@ export default function Preloader({ onComplete }) {
           setTimeout(() => onComplete?.(), 1000);
           return 100;
         }
-        // Smooth random increments
         const inc = Math.floor(Math.random() * 12) + 4;
         return Math.min(100, prev + inc);
       });
-    }, 60);
+    }, 55);
 
     return () => clearInterval(timer);
   }, [onComplete]);
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#060608] text-white transition-opacity duration-700 ${
-        isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}
       style={{
         position: 'fixed',
         inset: 0,
@@ -36,6 +32,9 @@ export default function Preloader({ onComplete }) {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#060608',
+        transition: 'opacity 0.7s ease',
+        opacity: isFading ? 0 : 1,
+        pointerEvents: isFading ? 'none' : 'auto',
       }}
     >
       {/* Background ambient glow */}
@@ -51,7 +50,7 @@ export default function Preloader({ onComplete }) {
       />
 
       <div style={{ position: 'relative', textAlign: 'center', maxWidth: '440px', padding: '0 20px' }}>
-        {/* Bugatti Monogram Crest */}
+        {/* Monogram Crest */}
         <div style={{ marginBottom: '24px' }}>
           <div
             style={{
@@ -59,23 +58,24 @@ export default function Preloader({ onComplete }) {
               height: '72px',
               margin: '0 auto',
               borderRadius: '50%',
-              border: '1px solid rgba(0, 240, 255, 0.4)',
+              border: '2px solid rgba(0, 240, 255, 0.5)',
+              background: 'linear-gradient(135deg, #1e293b, #0f172a)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 0 30px rgba(0, 240, 255, 0.2)',
+              boxShadow: '0 0 35px rgba(0, 240, 255, 0.25)',
             }}
           >
             <span
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: '28px',
+                fontSize: '26px',
                 fontWeight: 900,
                 letterSpacing: '2px',
-                color: '#ffffff',
+                color: 'var(--accent-cyan)',
               }}
             >
-              EB
+              AD
             </span>
           </div>
         </div>
@@ -86,25 +86,25 @@ export default function Preloader({ onComplete }) {
             fontFamily: 'var(--font-heading)',
             fontSize: '24px',
             fontWeight: 800,
-            letterSpacing: '0.2em',
+            letterSpacing: '0.18em',
             textTransform: 'uppercase',
             margin: '0 0 8px 0',
             color: '#f8fafc',
           }}
         >
-          BUGATTI
+          ADITYA DAHUJA
         </h1>
         <p
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '12px',
+            fontSize: '11px',
             color: 'var(--accent-cyan)',
-            letterSpacing: '0.25em',
+            letterSpacing: '0.22em',
             textTransform: 'uppercase',
             marginBottom: '36px',
           }}
         >
-          LA VOITURE NOIRE
+          PORTFOLIO & 3D ARCHITECTURE
         </p>
 
         {/* Progress Bar */}
@@ -136,11 +136,11 @@ export default function Preloader({ onComplete }) {
             display: 'flex',
             justifyContent: 'space-between',
             fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
+            fontSize: '10px',
             color: '#64748b',
           }}
         >
-          <span>CALIBRATING 3D ATELIER</span>
+          <span>CALIBRATING 3D ENVIRONMENT</span>
           <span style={{ color: '#00f0ff', fontWeight: 600 }}>{progress}%</span>
         </div>
       </div>

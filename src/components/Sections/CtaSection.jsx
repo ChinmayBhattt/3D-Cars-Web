@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Sparkles, CheckCircle2, X, FileText, ChevronRight } from 'lucide-react';
+import { Sparkles, CheckCircle2, X, FileText, Send, Mail, ExternalLink } from 'lucide-react';
+import { LinkedinIcon } from '../UI/Icons';
 
 export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquire }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    location: 'Molsheim Headquarters (France)',
+    company: '',
+    role: 'Full-Time SDE Position',
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
-  const [showSpecs, setShowSpecs] = useState(false);
+  const [showResumeSpecs, setShowResumeSpecs] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,21 +22,15 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
     }, 2800);
   };
 
-  const specs = [
-    { label: 'ENGINE ARCHITECTURE', val: '8.0L W16 Quad-Turbocharged, 64 Valves' },
-    { label: 'POWER RATING', val: '1,500 PS (1,479 BHP / 1,103 kW) @ 6,700 RPM' },
-    { label: 'PEAK TORQUE', val: '1,600 Nm (1,180 lb-ft) @ 2,000–6,000 RPM' },
-    { label: 'TRANSMISSION', val: '7-Speed Dual-Clutch (DSG) with Permanent AWD' },
-    { label: '0–100 KM/H (0–62 MPH)', val: '2.4 Seconds' },
-    { label: '0–200 KM/H (0–124 MPH)', val: '6.1 Seconds' },
-    { label: '0–300 KM/H (0–186 MPH)', val: '12.1 Seconds' },
-    { label: 'TOP SPEED', val: '420 km/h (261 mph, electronically limited)' },
-    { label: 'CHASSIS & BODY', val: 'Full Carbon Fiber Monocoque & Outer Shell' },
-    { label: 'DRY WEIGHT', val: '1,990 kg (4,387 lbs)' },
-    { label: 'BRAKING SYSTEM', val: 'Carbon Ceramic Discs (420mm F / 400mm R) with 8-Piston Calipers' },
-    { label: 'EXHAUST SYSTEM', val: '6 Titanium Tailpipes with Heat-Treated Tips' },
-    { label: 'PRODUCTION VOLUME', val: 'Strictly One of One (1/1 Worldwide)' },
-    { label: 'ORIGINAL COMMISSION PRICE', val: '€16.7 Million ($18.7 Million USD incl. taxes)' },
+  const resumeMatrix = [
+    { label: 'PRIMARY ROLE', val: 'Software Development Engineer (SDE) / Full Stack' },
+    { label: 'CORE LANGUAGES', val: 'JavaScript (ES6+), C++, Python, SQL' },
+    { label: 'FRONTEND STACK', val: 'React.js, Three.js, GSAP, HTML5, CSS3, Tailwind' },
+    { label: 'BACKEND ARCHITECTURE', val: 'Node.js, Express.js, RESTful Endpoints, Microservices' },
+    { label: 'DATABASES & STORAGE', val: 'MySQL, Relational Schema Modeling, Query Tuning' },
+    { label: 'LEADERSHIP & EVENTS', val: 'Team Lead • Organizer @HackAryaVerse (24-hr Hackathon)' },
+    { label: 'DESIGN & UI/UX', val: 'Figma to Production Code, 3D Web Graphics, Fluid Motion' },
+    { label: 'AVAILABILITY', val: 'Open for SDE Roles, Internships & High-Impact Projects' },
   ];
 
   return (
@@ -55,23 +50,23 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
       }}
     >
       <div style={{ maxWidth: '1000px', width: '100%', textAlign: 'center' }}>
-        {/* Crest */}
+        {/* Monogram Crest */}
         <div
           style={{
             width: '64px',
             height: '64px',
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, #d31620, #880910)',
+            background: 'linear-gradient(135deg, #1e293b, #0f172a)',
             margin: '0 auto 2rem auto',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 0 35px rgba(211, 22, 32, 0.45)',
-            border: '2px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 0 35px rgba(0, 240, 255, 0.4)',
+            border: '2px solid var(--accent-cyan)',
           }}
         >
-          <span style={{ fontFamily: 'var(--font-display)', fontSize: '24px', fontWeight: 900, color: '#ffffff' }}>
-            EB
+          <span style={{ fontFamily: 'var(--font-display)', fontSize: '24px', fontWeight: 900, color: 'var(--accent-cyan)' }}>
+            AD
           </span>
         </div>
 
@@ -91,7 +86,7 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
             marginBottom: '1.25rem',
           }}
         >
-          <span>ONE OF ONE • BESPOKE CREATION</span>
+          <span>INITIATE COLLABORATION</span>
         </div>
 
         <h2
@@ -105,7 +100,7 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
             lineHeight: 1.05,
           }}
         >
-          OWN A MONUMENT OF AUTOMOTIVE HISTORY
+          LET'S ARCHITECT SOMETHING EXTRAORDINARY
         </h2>
 
         <p
@@ -118,34 +113,45 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
             lineHeight: 1.7,
           }}
         >
-          La Voiture Noire represents the summit of Bugatti's 110-year legacy. 
-          Private viewings, archival documentation, and confidential commissions 
-          are arranged via the Molsheim Atelier Concierge.
+          Seeking full-time Software Development Engineer (SDE) opportunities and ambitious 
+          collaborations. Connect directly via LinkedIn or send a direct transmission below.
         </p>
 
         {/* Action Buttons */}
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1.25rem', marginBottom: '4rem' }}>
           <button
             onClick={onOpenInquire}
-            className="btn-luxury btn-primary-red"
-            style={{ padding: '1.1rem 2.8rem', fontSize: '0.95rem' }}
+            className="btn-luxury"
+            style={{ padding: '1.1rem 2.8rem', fontSize: '0.95rem', borderColor: 'var(--accent-cyan)' }}
           >
-            <Sparkles size={16} />
-            <span>REQUEST PRIVATE ATELIER VIEWING</span>
+            <Send size={16} />
+            <span>CONNECT WITH ADITYA</span>
           </button>
 
-          <button
-            onClick={() => setShowSpecs(!showSpecs)}
+          <a
+            href="https://www.linkedin.com/in/aditya-dahuja/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-luxury"
-            style={{ padding: '1.1rem 2.2rem', fontSize: '0.95rem' }}
+            style={{ padding: '1.1rem 2.4rem', fontSize: '0.95rem', textDecoration: 'none' }}
+          >
+            <LinkedinIcon size={16} />
+            <span>LINKEDIN PROFILE</span>
+            <ExternalLink size={13} />
+          </a>
+
+          <button
+            onClick={() => setShowResumeSpecs(!showResumeSpecs)}
+            className="btn-luxury"
+            style={{ padding: '1.1rem 2.0rem', fontSize: '0.95rem' }}
           >
             <FileText size={16} />
-            <span>{showSpecs ? 'HIDE FULL TECHNICAL SHEET' : 'FULL TECHNICAL SHEET'}</span>
+            <span>{showResumeSpecs ? 'HIDE RESUME MATRIX' : 'VIEW RESUME MATRIX'}</span>
           </button>
         </div>
 
-        {/* Technical Specification Table Drawer */}
-        {showSpecs && (
+        {/* Technical Resume Matrix Drawer */}
+        {showResumeSpecs && (
           <div
             className="glass-panel"
             style={{
@@ -158,11 +164,11 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
             }}
           >
             <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.5rem' }}>
-              BUGATTI LA VOITURE NOIRE — COMPLETE TECHNICAL MATRIX
+              ADITYA DAHUJA — SDE CANDIDACY SPECIFICATION MATRIX
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.25rem' }}>
-              {specs.map((item, idx) => (
+              {resumeMatrix.map((item, idx) => (
                 <div
                   key={idx}
                   style={{
@@ -187,18 +193,20 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
         {/* Footer info */}
         <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '2.5rem', display: 'flex', flexDirection: 'column', mdDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#64748b' }}>
-            © {new Date().getFullYear()} BUGATTI AUTOMOBILES S.A.S. • CHÂTEAU SAINT JEAN, MOLSHEIM, FRANCE.
+            © {new Date().getFullYear()} ADITYA DAHUJA • ARCHITECTED WITH REACT + THREE.JS + GSAP.
           </div>
           <div style={{ display: 'flex', gap: '1.5rem', fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#94a3b8' }}>
-            <span>PUR SANG HERITAGE</span>
-            <span>PRIVACY PROTOCOL</span>
-            <span>PRESS RELEASES</span>
+            <a href="https://www.linkedin.com/in/aditya-dahuja/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-cyan)', textDecoration: 'none' }}>
+              LINKEDIN
+            </a>
+            <span>HACKARYAVERSE</span>
+            <span>OPEN SOURCE</span>
           </div>
         </div>
       </div>
 
       {/* ========================================================= */}
-      {/* INQUIRY MODAL                                             */}
+      {/* CONNECT MODAL                                             */}
       {/* ========================================================= */}
       {isOpenInquire && (
         <div
@@ -222,7 +230,7 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
               borderRadius: '24px',
               padding: '2.5rem',
               position: 'relative',
-              border: '1px solid rgba(0, 240, 255, 0.35)',
+              border: '1px solid var(--accent-cyan)',
               boxShadow: '0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0,240,255,0.15)',
               textAlign: 'left',
             }}
@@ -253,32 +261,32 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
               <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
                 <CheckCircle2 size={56} className="text-cyan-400" style={{ margin: '0 auto 1.5rem auto' }} />
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.75rem' }}>
-                  DOSSIER TRANSMITTED
+                  TRANSMISSION RECEIVED
                 </h3>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: '#94a3b8' }}>
-                  Your private inquiry has been encrypted and routed directly to the Molsheim Atelier VIP Director.
+                  Thank you! Your message has been routed directly to Aditya Dahuja. I will respond promptly.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
                 <div style={{ marginBottom: '1.5rem' }}>
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--accent-cyan)', letterSpacing: '0.15em' }}>
-                    VIP CONCIERGE ACCESS
+                    DIRECT TRANSMISSION
                   </span>
                   <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', fontWeight: 800, color: '#ffffff', marginTop: '4px' }}>
-                    ARRANGE PRIVATE CONSULTATION
+                    CONNECT WITH ADITYA DAHUJA
                   </h3>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '2rem' }}>
                   <div>
                     <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#94a3b8', marginBottom: '6px' }}>
-                      FULL NAME / TITLE
+                      YOUR NAME / ORGANIZATION
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Lord Alexander Vance"
+                      placeholder="e.g. Sarah Jenkins (Tech Lead)"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       style={{
@@ -297,12 +305,12 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
 
                   <div>
                     <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#94a3b8', marginBottom: '6px' }}>
-                      CONFIDENTIAL EMAIL
+                      YOUR EMAIL
                     </label>
                     <input
                       type="email"
                       required
-                      placeholder="client@sanctuary.com"
+                      placeholder="recruiter@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       style={{
@@ -321,11 +329,11 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
 
                   <div>
                     <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#94a3b8', marginBottom: '6px' }}>
-                      PREFERRED ATELIER RENDEZVOUS
+                      INQUIRY NATURE
                     </label>
                     <select
-                      value={formData.location}
-                      onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                      value={formData.role}
+                      onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                       style={{
                         width: '100%',
                         padding: '12px 16px',
@@ -338,22 +346,21 @@ export default function CtaSection({ isOpenInquire, onCloseInquire, onOpenInquir
                         outline: 'none',
                       }}
                     >
-                      <option value="Molsheim Headquarters (France)">Château Saint Jean, Molsheim (France)</option>
-                      <option value="Monaco Private Salon">Monte Carlo Atelier (Monaco)</option>
-                      <option value="Dubai VIP Lounge">Dubai Financial Centre (UAE)</option>
-                      <option value="Beverly Hills Atelier">Rodeo Drive Studio, Beverly Hills (USA)</option>
-                      <option value="Tokyo Ginza Salon">Ginza Private Salon, Tokyo (Japan)</option>
+                      <option value="Full-Time SDE Position">Full-Time SDE Role</option>
+                      <option value="Software Engineering Internship">Software Engineering Internship</option>
+                      <option value="HackAryaVerse Collaboration">HackAryaVerse / Community Collaboration</option>
+                      <option value="Freelance / Contract Build">Technical Project Collaboration</option>
                     </select>
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="btn-luxury btn-primary-red"
-                  style={{ width: '100%', padding: '1.1rem', fontSize: '0.9rem' }}
+                  className="btn-luxury"
+                  style={{ width: '100%', padding: '1.1rem', fontSize: '0.9rem', borderColor: 'var(--accent-cyan)' }}
                 >
-                  <Sparkles size={16} />
-                  <span>TRANSMIT CONFIDENTIAL ENQUIRY</span>
+                  <Send size={15} />
+                  <span>TRANSMIT MESSAGE</span>
                 </button>
               </form>
             )}

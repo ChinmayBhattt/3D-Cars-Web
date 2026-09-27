@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Gauge, Zap, Flame, Wind, Play } from 'lucide-react';
+import { Gauge, Zap, Flame, Wind, Play, Cpu, Server, Database, Code } from 'lucide-react';
 import { revEngine } from '../../utils/audio';
 
 export default function PerformanceSection() {
@@ -11,34 +11,34 @@ export default function PerformanceSection() {
     setTimeout(() => setIsRevving(false), 1400);
   };
 
-  const stats = [
+  const metrics = [
     {
       icon: <Gauge className="text-cyan-400" size={24} />,
-      title: 'TOP SPEED',
-      value: '420',
-      unit: 'KM/H',
-      sub: 'Electronically Limited for Road Use (261 MPH)',
+      title: 'SYSTEM RELIABILITY',
+      value: '99.9',
+      unit: '%',
+      sub: 'Robust error handling, clean architecture, and defensive programming',
     },
     {
       icon: <Zap className="text-cyan-400" size={24} />,
-      title: 'ACCELERATION',
-      value: '2.4',
-      unit: 'SEC',
-      sub: '0 to 100 KM/H (0 to 62 MPH) in 2.4s',
+      title: 'LATENCY BENCHMARK',
+      value: '< 180',
+      unit: 'MS',
+      sub: 'High-performance Express/Node API responses & optimized MySQL queries',
     },
     {
       icon: <Flame className="text-cyan-400" size={24} />,
-      title: 'POWER OUTPUT',
-      value: '1,500',
-      unit: 'PS',
-      sub: '1,479 HP @ 6,700 RPM Quad-Turbocharged',
+      title: 'FLAGSHIP BUILDS',
+      value: '15+',
+      unit: 'PROJS',
+      sub: 'Production-ready full stack apps, 3D web platforms, and system tools',
     },
     {
       icon: <Wind className="text-cyan-400" size={24} />,
-      title: 'MAXIMUM TORQUE',
-      value: '1,600',
-      unit: 'NM',
-      sub: 'Flat torque curve from 2,000 to 6,000 RPM',
+      title: 'COMMUNITY IMPACT',
+      value: '1,000+',
+      unit: 'PEOPLE',
+      sub: 'Organizer & Team Lead @HackAryaVerse 24-hr national hackathon',
     },
   ];
 
@@ -77,7 +77,7 @@ export default function PerformanceSection() {
               marginBottom: '1rem',
             }}
           >
-            <span>ENGINEERING BENCHMARK</span>
+            <span>ENGINEERING TELEMETRY</span>
           </div>
 
           <h2
@@ -91,7 +91,7 @@ export default function PerformanceSection() {
               letterSpacing: '-0.01em',
             }}
           >
-            THE PINNACLE OF POWER
+            PERFORMANCE & METRICS
           </h2>
 
           <p
@@ -99,17 +99,17 @@ export default function PerformanceSection() {
               fontFamily: 'var(--font-body)',
               fontSize: '1.1rem',
               color: '#94a3b8',
-              maxWidth: '650px',
+              maxWidth: '680px',
               margin: '0 auto',
               lineHeight: 1.6,
             }}
           >
-            An 8.0-liter W16 quad-turbo engine with 16 cylinders arranged in an 
-            ingenious dual-V configuration, delivering unprecedented hyper-sports performance.
+            Building software with the relentless rigor of high-performance automotive engineering. 
+            Clean architectures, optimized algorithms, and scalable database schemas.
           </p>
         </div>
 
-        {/* 4 Performance Stat Cards */}
+        {/* 4 Performance Metric Cards */}
         <div
           style={{
             display: 'grid',
@@ -118,7 +118,7 @@ export default function PerformanceSection() {
             marginBottom: '3.5rem',
           }}
         >
-          {stats.map((stat, i) => (
+          {metrics.map((stat, i) => (
             <div
               key={i}
               className="glass-panel"
@@ -130,7 +130,7 @@ export default function PerformanceSection() {
                 transition: 'all 0.3s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.4)';
+                e.currentTarget.style.borderColor = 'var(--accent-cyan)';
                 e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 240, 255, 0.15)';
               }}
               onMouseLeave={(e) => {
@@ -151,7 +151,7 @@ export default function PerformanceSection() {
                 <span
                   style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: '3.2rem',
+                    fontSize: '3.0rem',
                     fontWeight: 800,
                     color: '#ffffff',
                     lineHeight: 1,
@@ -162,7 +162,7 @@ export default function PerformanceSection() {
                 <span
                   style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '1.1rem',
+                    fontSize: '1.05rem',
                     fontWeight: 700,
                     color: 'var(--accent-cyan)',
                   }}
@@ -178,7 +178,7 @@ export default function PerformanceSection() {
           ))}
         </div>
 
-        {/* Engine Throttle Interactive Bar */}
+        {/* Engine Throttle Interactive Bar (Car Sound Feature Preserved!) */}
         <div
           className="glass-panel"
           style={{
@@ -195,30 +195,31 @@ export default function PerformanceSection() {
         >
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#ff1e27' }} />
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#ff4d53', letterSpacing: '0.15em' }}>
-                ACOUSTIC SYNTHESIZER
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--accent-cyan)' }} />
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--accent-cyan)', letterSpacing: '0.15em' }}>
+                AUDIO BENCHMARK
               </span>
             </div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
-              EXPERIENCE THE W16 QUAD-TURBO ROAR
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+              POWERED BY HIGH-PERFORMANCE CODE ENGINES
             </h3>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: '#94a3b8', marginTop: '6px', margin: 0 }}>
-              Trigger the throttle response to hear the 16-cylinder ignition cycle and turbocharger blow-off.
+              Push the throttle to test the Web Audio engine sound synthesizer running in real-time.
             </p>
           </div>
 
           <button
             onClick={handleRev}
-            className={`btn-luxury ${isRevving ? 'btn-primary-red' : ''}`}
+            className="btn-luxury"
             style={{
               padding: '1.1rem 2.5rem',
               fontSize: '0.95rem',
-              boxShadow: isRevving ? '0 0 40px rgba(255, 30, 39, 0.8)' : undefined,
+              borderColor: 'var(--accent-cyan)',
+              boxShadow: isRevving ? '0 0 35px rgba(0, 240, 255, 0.7)' : undefined,
             }}
           >
             <Play size={16} fill="currentColor" />
-            <span>{isRevving ? 'THROTTLE REV ACTIVE...' : 'REV W16 ENGINE'}</span>
+            <span>{isRevving ? 'THROTTLE REV ACTIVE...' : 'TEST ENGINE AUDIO'}</span>
           </button>
         </div>
       </div>

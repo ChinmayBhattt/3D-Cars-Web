@@ -11,8 +11,8 @@ import Preloader from './components/UI/Preloader';
 import ThemeBar from './components/UI/ThemeBar';
 
 import PerformanceSection from './components/Sections/PerformanceSection';
-import DesignPhilosophySection from './components/Sections/DesignPhilosophySection';
-import InteriorSection from './components/Sections/InteriorSection';
+import ProjectsSection from './components/Sections/ProjectsSection';
+import AboutSection from './components/Sections/AboutSection';
 import ConfiguratorSection from './components/Sections/ConfiguratorSection';
 import CtaSection from './components/Sections/CtaSection';
 
@@ -130,7 +130,6 @@ export default function App() {
 
   // Mouse Drag rotation handlers
   const handlePointerDown = (e) => {
-    // Only drag if not clicking buttons or interactive links
     if (e.target.closest('button, a, input, select, .callout-badge-compact')) return;
     isDraggingRef.current = true;
     prevPointerRef.current = { x: e.clientX, y: e.clientY };
@@ -158,11 +157,11 @@ export default function App() {
   // Hotspot selection
   const handleSelectHotspot = (id) => {
     setActiveHotspot(id);
-    if (id === 'engine') setCameraMode('engine');
-    else if (id === 'wheel') setCameraMode('wheel');
-    else if (id === 'aerodynamics') setCameraMode('default');
-    else if (id === 'exhaust') setCameraMode('exhaust');
-    else if (id === 'chassis') setCameraMode('default');
+    if (id === 'backend') setCameraMode('engine');
+    else if (id === 'frontend') setCameraMode('wheel');
+    else if (id === 'systems') setCameraMode('default');
+    else if (id === 'leadership') setCameraMode('exhaust');
+    else if (id === 'database') setCameraMode('interior');
   };
 
   return (
@@ -202,7 +201,7 @@ export default function App() {
           width: '100vw',
           height: '100vh',
           zIndex: 5,
-          pointerEvents: 'none', // Handled smoothly by pointer event listeners
+          pointerEvents: 'none',
         }}
         className="studio-vignette"
       >
@@ -271,22 +270,22 @@ export default function App() {
       </section>
 
       {/* ========================================================= */}
-      {/* SUBSEQUENT SHOWCASE SECTIONS                              */}
+      {/* PORTFOLIO SHOWCASE SECTIONS                               */}
       {/* ========================================================= */}
       <div style={{ position: 'relative', zIndex: 20 }}>
-        {/* Performance & W16 Engine Stats */}
+        {/* Performance & Code Telemetry */}
         <PerformanceSection />
 
-        {/* Design Philosophy featuring user assets */}
-        <DesignPhilosophySection
+        {/* Flagship Projects & HackAryaVerse Platform */}
+        <ProjectsSection
           onSetCameraMode={(mode) => setCameraMode(mode)}
           currentCameraMode={cameraMode}
         />
 
-        {/* Bespoke Cockpit Interior & Material Lab */}
-        <InteriorSection onSetCameraMode={(mode) => setCameraMode(mode)} />
+        {/* About Aditya Dahuja, Photo & Skills Matrix */}
+        <AboutSection onSetCameraMode={(mode) => setCameraMode(mode)} />
 
-        {/* Interactive Atelier 3D Configurator */}
+        {/* Interactive 3D Configurator Studio */}
         <ConfiguratorSection
           carColor={carColor}
           onChangeCarColor={(col) => setCarColor(col)}
@@ -298,7 +297,7 @@ export default function App() {
           onToggleSpin={() => setIsSpinning(!isSpinning)}
         />
 
-        {/* Final CTA, Technical Sheet & Inquire Modal */}
+        {/* Connect, Resume Matrix & Inquire Suite */}
         <CtaSection
           isOpenInquire={isOpenInquire}
           onOpenInquire={() => setIsOpenInquire(true)}

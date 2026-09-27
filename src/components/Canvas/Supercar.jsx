@@ -21,10 +21,8 @@ export default function Supercar({
   const groupRef = useRef();
   const { scene } = useGLTF('/models/ferrari.glb');
 
-  // Clone scene to allow clean per-instance transforms
   const clonedScene = useMemo(() => scene.clone(), [scene]);
 
-  // Keep references to sub-objects
   const parts = useMemo(() => {
     const p = {
       body: null,
@@ -66,7 +64,6 @@ export default function Supercar({
     return p;
   }, [clonedScene]);
 
-  // Store initial local positions of parts
   const initialPos = useMemo(() => {
     return {
       body: parts.body ? parts.body.position.clone() : new THREE.Vector3(),
@@ -119,7 +116,7 @@ export default function Supercar({
           envMapIntensity: 1.8,
         });
       }
-      // Interior Leather / Cockpit (ensure seats are dark luxury leather, not washed out)
+      // Interior Leather / Cockpit
       else if (nodeName.includes('leather') || matName.includes('leather') || nodeName.includes('interior') || matName.includes('interior') || nodeName.includes('carpet')) {
         child.material = new THREE.MeshStandardMaterial({
           color: new THREE.Color(leatherColor || '#14151a'),
@@ -283,15 +280,15 @@ export default function Supercar({
       <primitive object={clonedScene} />
 
       {/* ========================================================= */}
-      {/* COMPACT, SLEEK 3D CALLOUT HUD PINS (NO OVERLAP)           */}
+      {/* ADITYA DAHUJA TECH STACK 3D DECONSTRUCTION BADGES         */}
       {/* ========================================================= */}
 
-      {/* 1. FRONT LEFT WHEEL & CARBON CERAMICS */}
+      {/* 1. FRONT LEFT WHEEL: FRONTEND & UI/UX */}
       {explodeProgress > 0.22 && (
         <Html position={[-1.75, 0.42, -1.0]} center distanceFactor={7} zIndexRange={[100, 0]}>
           <div
             className="callout-badge-compact cursor-pointer"
-            onClick={() => onSelectHotspot('wheel')}
+            onClick={() => onSelectHotspot('frontend')}
             style={{
               background: 'rgba(6, 7, 10, 0.88)',
               border: `1px solid ${caliperColor || '#00f0ff'}`,
@@ -306,25 +303,25 @@ export default function Supercar({
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
               <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: caliperColor || '#00f0ff' }} />
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: caliperColor || '#00f0ff', letterSpacing: '0.12em', fontWeight: 700 }}>
-                RUNNING GEAR
+                FRONTEND & UI/UX
               </span>
             </div>
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: '11px', fontWeight: 800, color: '#ffffff' }}>
-              Forged Turbine Alloys
+              React.js & Three.js 3D
             </div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#94a3b8' }}>
-              420mm Carbon Ceramics
+              GSAP • Modern JavaScript
             </div>
           </div>
         </Html>
       )}
 
-      {/* 2. AERODYNAMIC NOSE & SPLITTER */}
+      {/* 2. AERODYNAMIC SPLITTER: CORE ALGORITHMS & SYSTEMS */}
       {explodeProgress > 0.35 && (
         <Html position={[1.3, 0.35, -1.5]} center distanceFactor={7} zIndexRange={[100, 0]}>
           <div
             className="callout-badge-compact cursor-pointer"
-            onClick={() => onSelectHotspot('aerodynamics')}
+            onClick={() => onSelectHotspot('systems')}
             style={{
               background: 'rgba(6, 7, 10, 0.88)',
               border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -339,25 +336,25 @@ export default function Supercar({
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
               <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#00f0ff' }} />
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#00f0ff', letterSpacing: '0.12em', fontWeight: 700 }}>
-                AERODYNAMICS
+                SYSTEMS & LOGIC
               </span>
             </div>
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: '11px', fontWeight: 800, color: '#ffffff' }}>
-              Carbon Front Splitter
+              C++ & Python Engines
             </div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#94a3b8' }}>
-              High-Downforce Ducts
+              DSA • OOP • Clean Code
             </div>
           </div>
         </Html>
       )}
 
-      {/* 3. COCKPIT & CARBON MONOCOQUE */}
+      {/* 3. COCKPIT: DATA ARCHITECTURE & DATABASE */}
       {explodeProgress > 0.48 && (
         <Html position={[-1.1, 1.25, 0.2]} center distanceFactor={7} zIndexRange={[100, 0]}>
           <div
             className="callout-badge-compact cursor-pointer"
-            onClick={() => onSelectHotspot('chassis')}
+            onClick={() => onSelectHotspot('database')}
             style={{
               background: 'rgba(6, 7, 10, 0.88)',
               border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -372,25 +369,25 @@ export default function Supercar({
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
               <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#00f0ff' }} />
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#00f0ff', letterSpacing: '0.12em', fontWeight: 700 }}>
-                STRUCTURE
+                DATA ARCHITECTURE
               </span>
             </div>
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: '11px', fontWeight: 800, color: '#ffffff' }}>
-              Carbon Monocoque Tub
+              MySQL & Relational Models
             </div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#94a3b8' }}>
-              50,000 Nm/deg Rigidity
+              Query Optimization & Schema
             </div>
           </div>
         </Html>
       )}
 
-      {/* 4. MID-REAR W16 QUAD-TURBO POWERTRAIN */}
+      {/* 4. MID-REAR ENGINE: BACKEND POWERPLANT */}
       {explodeProgress > 0.62 && (
         <Html position={[1.35, 1.15, 0.9]} center distanceFactor={7} zIndexRange={[100, 0]}>
           <div
             className="callout-badge-compact cursor-pointer"
-            onClick={() => onSelectHotspot('engine')}
+            onClick={() => onSelectHotspot('backend')}
             style={{
               background: 'rgba(6, 7, 10, 0.88)',
               border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -405,28 +402,28 @@ export default function Supercar({
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
               <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#00f0ff' }} />
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#00f0ff', letterSpacing: '0.12em', fontWeight: 700 }}>
-                POWERTRAIN
+                BACKEND POWERPLANT
               </span>
             </div>
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: '11px', fontWeight: 800, color: '#ffffff' }}>
-              8.0L W16 Quad-Turbo
+              Node.js & Express.js
             </div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#94a3b8' }}>
-              1,500 PS • 1,600 Nm
+              REST APIs • Microservices
             </div>
           </div>
         </Html>
       )}
 
-      {/* 5. REAR EXHAUST & DIFFUSER */}
+      {/* 5. REAR EXHAUST / AERO: LEADERSHIP & ECOSYSTEM */}
       {explodeProgress > 0.72 && (
         <Html position={[-0.8, 0.3, 2.2]} center distanceFactor={7} zIndexRange={[100, 0]}>
           <div
             className="callout-badge-compact cursor-pointer"
-            onClick={() => onSelectHotspot('exhaust')}
+            onClick={() => onSelectHotspot('leadership')}
             style={{
               background: 'rgba(6, 7, 10, 0.88)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              border: '1px solid rgba(255, 255, 0.2)',
               backdropFilter: 'blur(12px)',
               padding: '6px 12px',
               borderRadius: '8px',
@@ -438,14 +435,14 @@ export default function Supercar({
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
               <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#00f0ff' }} />
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#00f0ff', letterSpacing: '0.12em', fontWeight: 700 }}>
-                EXHAUST
+                LEADERSHIP & EVENTS
               </span>
             </div>
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: '11px', fontWeight: 800, color: '#ffffff' }}>
-              Titanium Tailpipes
+              Organizer @HackAryaVerse
             </div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#94a3b8' }}>
-              6 In-line Outlets
+              Team Lead • Community Drive
             </div>
           </div>
         </Html>

@@ -9,14 +9,14 @@ export default function ExplodedOverlay({
   // Only display when user has entered exploded sequence
   if (explodeProgress < 0.08 || explodeProgress > 0.98) return null;
 
-  let stageTitle = 'STAGE 1: FORGED RUNNING GEAR';
-  let stageDesc = 'Forged turbine wheels and 420mm carbon-ceramic brakes decouple outward.';
+  let stageTitle = 'STAGE 1: FRONTEND DYNAMICS & UI/UX';
+  let stageDesc = 'Decoupling React.js, Three.js 3D viewport, and interactive motion systems.';
   if (explodeProgress >= 0.35 && explodeProgress < 0.65) {
-    stageTitle = 'STAGE 2: AERO & COCKPIT SEPARATION';
-    stageDesc = 'Body shell lifts, exposing the carbon monocoque and interior steering assembly.';
+    stageTitle = 'STAGE 2: CORE LOGIC & DATA MONOCOQUE';
+    stageDesc = 'Exposing C++, Python algorithms, Data Structures, and MySQL relational schemas.';
   } else if (explodeProgress >= 0.65) {
-    stageTitle = 'STAGE 3: FULL POWERTRAIN BLUEPRINT';
-    stageDesc = 'Complete deconstruction reveals the mid-rear W16 architecture and chassis.';
+    stageTitle = 'STAGE 3: BACKEND POWERPLANT & LEADERSHIP';
+    stageDesc = 'Revealing Node.js/Express REST server engines and HackAryaVerse organizer leadership.';
   }
 
   const percentage = Math.round(explodeProgress * 100);
@@ -42,7 +42,7 @@ export default function ExplodedOverlay({
           padding: '12px 18px',
           borderRadius: '10px',
           borderLeft: '3px solid var(--accent-cyan)',
-          maxWidth: '320px',
+          maxWidth: '340px',
           pointerEvents: 'auto',
         }}
       >
@@ -50,7 +50,7 @@ export default function ExplodedOverlay({
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Layers size={13} className="text-cyan-400" />
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--accent-cyan)', letterSpacing: '0.12em' }}>
-              EXPLODED CAD VIEW
+              TECH STACK DECONSTRUCTION
             </span>
           </div>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, color: '#f8fafc' }}>
@@ -71,7 +71,7 @@ export default function ExplodedOverlay({
         </div>
       </div>
 
-      {/* Top Right: Compact Hotspot Focus Tags */}
+      {/* Top Right: Competency Focus Pills */}
       <div
         style={{
           alignSelf: 'flex-end',
@@ -83,11 +83,11 @@ export default function ExplodedOverlay({
         className="hidden sm:flex"
       >
         {[
-          { id: 'wheel', label: 'Forged Alloys & Ceramics' },
-          { id: 'aerodynamics', label: 'Carbon Aero Splitter' },
-          { id: 'chassis', label: 'Carbon Monocoque Tub' },
-          { id: 'engine', label: '8.0L W16 Quad-Turbo' },
-          { id: 'exhaust', label: 'Hexa Titanium Exhaust' },
+          { id: 'frontend', label: 'Frontend & UI/UX (React/3D)' },
+          { id: 'systems', label: 'Systems & Logic (C++/Python)' },
+          { id: 'database', label: 'Data Architecture (MySQL)' },
+          { id: 'backend', label: 'Backend APIs (Node/Express)' },
+          { id: 'leadership', label: 'Leadership @HackAryaVerse' },
         ].map((item) => (
           <button
             key={item.id}
@@ -131,7 +131,7 @@ export default function ExplodedOverlay({
           backdropFilter: 'blur(8px)',
         }}
       >
-        SCROLL DOWN TO DECONSTRUCT • SCROLL UP TO REASSEMBLE
+        SCROLL TO DECONSTRUCT • SCROLL UP TO REASSEMBLE
       </div>
     </div>
   );

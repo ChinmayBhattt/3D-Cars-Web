@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Volume2, VolumeX, Menu, X, Sparkles } from 'lucide-react';
+import { Volume2, VolumeX, Menu, X, Send } from 'lucide-react';
+import { LinkedinIcon } from './Icons';
 import { startEngineSound, stopEngineSound, revEngine } from '../../utils/audio';
 
 export default function Navbar({ onOpenInquire }) {
@@ -33,11 +34,11 @@ export default function Navbar({ onOpenInquire }) {
         left: 0,
         width: '100%',
         zIndex: 40,
-        padding: '1.25rem 2rem',
+        padding: '1.2rem 2rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        background: 'linear-gradient(180deg, rgba(6,6,8,0.85) 0%, rgba(6,6,8,0.2) 80%, transparent 100%)',
+        background: 'linear-gradient(180deg, rgba(6,6,8,0.88) 0%, rgba(6,6,8,0.2) 80%, transparent 100%)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
@@ -57,14 +58,14 @@ export default function Navbar({ onOpenInquire }) {
         <div
           style={{
             width: '42px',
-            height: '24px',
+            height: '26px',
             borderRadius: '999px',
-            background: 'linear-gradient(135deg, #d31620, #880910)',
+            background: 'linear-gradient(135deg, #1e293b, #0f172a)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 0 15px rgba(211, 22, 32, 0.4)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 0 15px rgba(0, 240, 255, 0.3)',
+            border: '1px solid var(--accent-cyan)',
           }}
         >
           <span
@@ -72,11 +73,11 @@ export default function Navbar({ onOpenInquire }) {
               fontFamily: 'var(--font-display)',
               fontSize: '11px',
               fontWeight: 900,
-              color: '#ffffff',
+              color: 'var(--accent-cyan)',
               letterSpacing: '1px',
             }}
           >
-            EB
+            AD
           </span>
         </div>
 
@@ -84,25 +85,25 @@ export default function Navbar({ onOpenInquire }) {
           <div
             style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: '14px',
+              fontSize: '15px',
               fontWeight: 800,
-              letterSpacing: '0.18em',
+              letterSpacing: '0.15em',
               textTransform: 'uppercase',
               color: '#f8fafc',
             }}
           >
-            BUGATTI
+            ADITYA DAHUJA
           </div>
           <div
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '9px',
-              letterSpacing: '0.22em',
+              letterSpacing: '0.2em',
               textTransform: 'uppercase',
               color: 'var(--accent-cyan)',
             }}
           >
-            LA VOITURE NOIRE
+            ASPIRING SDE • TEAM LEAD
           </div>
         </div>
       </div>
@@ -114,14 +115,14 @@ export default function Navbar({ onOpenInquire }) {
           alignItems: 'center',
           gap: '2rem',
         }}
-        className="hidden md:flex"
+        className="hidden lg:flex"
       >
         {[
           { label: 'OVERVIEW', id: 'hero' },
-          { label: 'EXPLODED VIEW', id: 'exploded' },
-          { label: 'PERFORMANCE', id: 'performance' },
-          { label: 'DESIGN', id: 'design' },
-          { label: 'INTERIOR', id: 'interior' },
+          { label: 'TECH ARCHITECTURE', id: 'exploded' },
+          { label: 'TELEMETRY', id: 'performance' },
+          { label: 'EXPERIENCE & PROJECTS', id: 'projects' },
+          { label: 'ABOUT ADITYA', id: 'about' },
           { label: 'ATELIER', id: 'atelier' },
         ].map((item) => (
           <button
@@ -132,13 +133,13 @@ export default function Navbar({ onOpenInquire }) {
               border: 'none',
               color: '#94a3b8',
               fontFamily: 'var(--font-mono)',
-              fontSize: '12px',
+              fontSize: '11px',
               letterSpacing: '0.12em',
               cursor: 'pointer',
               transition: 'color 0.2s ease',
               padding: '6px 0',
             }}
-            onMouseEnter={(e) => (e.target.style.color = '#00f0ff')}
+            onMouseEnter={(e) => (e.target.style.color = 'var(--accent-cyan)')}
             onMouseLeave={(e) => (e.target.style.color = '#94a3b8')}
           >
             {item.label}
@@ -146,61 +147,81 @@ export default function Navbar({ onOpenInquire }) {
         ))}
       </nav>
 
-      {/* Action Buttons: Engine Sound & Inquire */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        {/* Sound Toggle Button */}
+      {/* Action Buttons: LinkedIn, Audio, Connect */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        {/* LinkedIn Quick Link */}
+        <a
+          href="https://www.linkedin.com/in/aditya-dahuja/"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Connect on LinkedIn"
+          style={{
+            background: 'rgba(255, 255, 255, 0.05)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            borderRadius: '50%',
+            width: '34px',
+            height: '34px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#00f0ff',
+            textDecoration: 'none',
+            transition: 'all 0.25s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'var(--accent-cyan)';
+            e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 240, 255, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        >
+          <LinkedinIcon size={15} />
+        </a>
+
+        {/* Engine Sound Toggle Button (Preserved!) */}
         <button
           onClick={toggleAudio}
-          title={isPlayingAudio ? 'Mute W16 Engine' : 'Start W16 Engine Sound'}
+          title={isPlayingAudio ? 'Mute Audio' : 'Play Engine Sound'}
           style={{
             background: isPlayingAudio ? 'rgba(0, 240, 255, 0.15)' : 'rgba(255, 255, 255, 0.05)',
             border: `1px solid ${isPlayingAudio ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.12)'}`,
             borderRadius: '999px',
-            padding: '8px 14px',
+            padding: '7px 12px',
             color: isPlayingAudio ? 'var(--accent-cyan)' : '#94a3b8',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
+            gap: '6px',
             fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
+            fontSize: '10px',
             letterSpacing: '0.1em',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
-            boxShadow: isPlayingAudio ? '0 0 15px rgba(0, 240, 255, 0.3)' : 'none',
           }}
+          className="hidden sm:flex"
         >
-          {isPlayingAudio ? <Volume2 size={15} /> : <VolumeX size={15} />}
-          <span className="hidden sm:inline">{isPlayingAudio ? 'W16 ACTIVE' : 'ENGINE AUDIO'}</span>
-          {isPlayingAudio && (
-            <span
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                backgroundColor: '#00f0ff',
-                boxShadow: '0 0 8px #00f0ff',
-              }}
-              className="animate-pulse"
-            />
-          )}
+          {isPlayingAudio ? <Volume2 size={14} /> : <VolumeX size={14} />}
+          <span>{isPlayingAudio ? 'AUDIO ON' : 'AUDIO'}</span>
         </button>
 
-        {/* CTA Inquire Button */}
+        {/* Connect / Hire Button */}
         <button
           onClick={onOpenInquire}
-          className="btn-luxury btn-primary-red"
+          className="btn-luxury"
           style={{
-            padding: '8px 20px',
+            padding: '7px 18px',
             fontSize: '11px',
+            borderColor: 'var(--accent-cyan)',
           }}
         >
-          <Sparkles size={13} />
-          <span>INQUIRE</span>
+          <Send size={12} />
+          <span>CONNECT</span>
         </button>
 
-        {/* Mobile menu hamburger toggle */}
+        {/* Mobile menu toggle */}
         <button
-          className="md:hidden"
+          className="lg:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           style={{
             background: 'none',
@@ -210,7 +231,7 @@ export default function Navbar({ onOpenInquire }) {
             padding: '4px',
           }}
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
@@ -222,7 +243,7 @@ export default function Navbar({ onOpenInquire }) {
             top: '100%',
             left: 0,
             width: '100%',
-            background: 'rgba(6, 6, 8, 0.96)',
+            background: 'rgba(6, 6, 8, 0.98)',
             backdropFilter: 'blur(20px)',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
             padding: '1.5rem 2rem',
@@ -230,14 +251,14 @@ export default function Navbar({ onOpenInquire }) {
             flexDirection: 'column',
             gap: '1rem',
           }}
-          className="md:hidden"
+          className="lg:hidden"
         >
           {[
             { label: 'OVERVIEW', id: 'hero' },
-            { label: 'EXPLODED VIEW', id: 'exploded' },
-            { label: 'PERFORMANCE', id: 'performance' },
-            { label: 'DESIGN', id: 'design' },
-            { label: 'INTERIOR', id: 'interior' },
+            { label: 'TECH ARCHITECTURE', id: 'exploded' },
+            { label: 'TELEMETRY', id: 'performance' },
+            { label: 'EXPERIENCE & PROJECTS', id: 'projects' },
+            { label: 'ABOUT ADITYA', id: 'about' },
             { label: 'ATELIER', id: 'atelier' },
           ].map((item) => (
             <button
@@ -248,7 +269,7 @@ export default function Navbar({ onOpenInquire }) {
                 border: 'none',
                 color: '#e2e8f0',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '14px',
+                fontSize: '13px',
                 textAlign: 'left',
                 padding: '8px 0',
                 cursor: 'pointer',
@@ -257,6 +278,24 @@ export default function Navbar({ onOpenInquire }) {
               {item.label}
             </button>
           ))}
+          <a
+            href="https://www.linkedin.com/in/aditya-dahuja/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'var(--accent-cyan)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '13px',
+              textDecoration: 'none',
+              padding: '8px 0',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+            }}
+          >
+            <LinkedinIcon size={15} />
+            <span>LINKEDIN PROFILE</span>
+          </a>
         </div>
       )}
     </header>
